@@ -1,11 +1,16 @@
-import express from "express";
+import { Request, Response, NextFunction } from 'express';
 
-const logger = (req: express.Request, res: express.Response, next: Function): void => {
-    let url = req.url;
-    console.log(`${url} was visited`)
-    console.log(`with request: ${req.body}`)
-    console.log(`then response status: ${res.statusCode}`)
-    next()
-}
+const logger = (
+  req: Request,
+  res: Response,
+  next: NextFunction,
+): void => {
+  const url = req.url;
+  console.log(`${url} was visited`);
+  console.log(`with request: ${req.body}`);
+  console.log(`with query params: ${req.query.name}`)
+  console.log(`then response status: ${res.statusCode}`);
+  next();
+};
 
-export default logger
+export default logger;
