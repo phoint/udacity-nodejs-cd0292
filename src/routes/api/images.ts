@@ -1,13 +1,15 @@
-import express from "express";
-import path from "path";
-import serveImage from "../../utilities/serveImage";
+import express from 'express';
+import serveImage from '../../utilities/serveImage';
 
-const images = express.Router()
+const images = express.Router();
 
-images.use(serveImage, express.static("images", {
-    redirect: false
-}))
+images.use(
+  serveImage,
+  express.static('images', {
+    redirect: false,
+  }),
+);
 
 // images.get("/", express.static("images"))
 
-export default images
+export default images;
