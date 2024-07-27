@@ -27,7 +27,8 @@
     "typescript-eslint": "^7.16.1"
   },
   "dependencies": {
-    "express": "^4.19.2"
+    "express": "^4.19.2",
+    "sharp": "^0.33.4"
   },
   "overrides": {
     "eslint": "^9.7.0"

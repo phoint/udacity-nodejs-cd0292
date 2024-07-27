@@ -9,24 +9,35 @@ const serveImage = (
   res: Response,
   next: NextFunction,
 ): void => {
+  console.group("Serve Image")
   const imageName = req.query.name as string;
   const width = req.query.width as string;
   const height = req.query.height as string;
+  console.log("Image name: ", imageName)
+  console.log("width: ", width)
+  console.log("height: ", height)
+
   try {
     if (!imageName) {
+      console.log("Image name is missing")
       throw new Error('Image name is required!');
     }
     if (!width) {
-        req.url = `/${imageName}`;
-
+      console.log("Serving raw image")
+      req.url = `/${imageName}`;
     } else {
-      const thumbName = imageName.concat("-thumb")
+      console.log("Serving resized image")
+      const thumbName = imageName.concat(`-${width}${height?'x'.concat(height):''}.jpg`)
       req.url = `/thumb/${thumbName}`;
     }
     next();
   } catch (error) {
+    console.error("Error while serving image")
     next(error)
   }
+  console.groupEnd()
+  console.groupCollapsed("Serve Image")
+  console.groupEnd()
 };
 
 export default serveImage;
