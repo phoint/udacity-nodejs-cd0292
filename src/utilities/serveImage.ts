@@ -1,19 +1,32 @@
 import { NextFunction, Request, Response } from 'express';
+import util from 'util';
+import fs from 'fs';
+import path from 'path';
+import { imagesDir, search, thumbDir } from './fileHandler';
 
-const serveImage = (req: Request, res: Response, next: NextFunction): void => {
-  const imageName = req.query.name as unknown as string;
+const serveImage = (
+  req: Request,
+  res: Response,
+  next: NextFunction,
+): void => {
+  const imageName = req.query.name as string;
   const width = req.query.width as string;
   const height = req.query.height as string;
-  if (!imageName) {
+  try {
+    if (!imageName) {
+      throw new Error('Image name is required!');
+    }
+    if (!width) {
+        req.url = `/${imageName}`;
+
+    } else {
+      const thumbName = imageName.concat("-thumb")
+      req.url = `/thumb/${thumbName}`;
+    }
     next();
+  } catch (error) {
+    next(error)
   }
-  if (!width && !height) {
-    req.url = `/${imageName?.concat('.jpg')}`;
-  } else {
-    const thumb = imageName?.concat('-thumb.jpg');
-    req.url = `/thumb/${thumb}`;
-  }
-  next();
 };
 
 export default serveImage;
