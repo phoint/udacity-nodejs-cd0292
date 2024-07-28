@@ -10,22 +10,24 @@ const resizeImage = async (
   const width = req.query.width as string;
   const height = req.query.height as string;
   const imageName = req.query.name as string;
-  console.group("Resize Image")
+  console.group('Resize Image');
   console.log(`width: ${width}`);
   console.log(`height: ${height}`);
 
   try {
     if (!width) {
-      console.log("width is missing, origin Image Not Found")
+      console.log('width is missing, origin Image Not Found');
       throw new Error('Image Not Found');
     }
     if (!imageName) {
-      console.log("Image name is missing")
+      console.log('Image name is missing');
       throw new Error('Image name is required!');
     } else {
-      const resizedImage = imageName.concat(`-${width}${height?'x'.concat(height):''}.jpg`);
-      console.log("creating resized image name: ", resizedImage)
-      const imagePath = await search(imagesDir, imageName)
+      const resizedImage = imageName.concat(
+        `-${width}${height ? 'x'.concat(height) : ''}.jpg`,
+      );
+      console.log('creating resized image name: ', resizedImage);
+      const imagePath = await search(imagesDir, imageName);
       if (imagePath) {
         await resize(
           imagePath,
@@ -33,21 +35,21 @@ const resizeImage = async (
           parseInt(width),
           parseInt(height),
         );
-        console.log("Resized successful. Serving image.")
-        req.url = `/${resizedImage}`
+        console.log('Resized successful. Serving image.');
+        req.url = `/${resizedImage}`;
         next();
       } else {
-        console.log("Raw Image Not Found")
-        throw new Error("Image Not Found")
+        console.log('Raw Image Not Found');
+        throw new Error('Image Not Found');
       }
     }
   } catch (error) {
-    console.log("Error while resizing image")
-    next(error)
+    console.log('Error while resizing image');
+    next(error);
   }
-  console.groupEnd()
-  console.groupCollapsed("Resize Image")
-  console.groupEnd()
+  console.groupEnd();
+  console.groupCollapsed('Resize Image');
+  console.groupEnd();
 };
 
 export default resizeImage;

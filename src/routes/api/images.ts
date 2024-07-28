@@ -5,18 +5,23 @@ import errorHandler from '../../utilities/errorHandler';
 
 const images = express.Router();
 
-images.use("/",
+images.use(
+  '/',
   serveImage,
   express.static('images', {
     redirect: false,
-    extensions: ['jpg','png']
-  })
+    extensions: ['jpg', 'png'],
+  }),
 );
-images.use("/", resizeImage, express.static('images/thumb', {
-  redirect: false,
-  extensions:['jpg', 'png'],
-  fallthrough: false
-}))
+images.use(
+  '/',
+  resizeImage,
+  express.static('images/thumb', {
+    redirect: false,
+    extensions: ['jpg', 'png'],
+    fallthrough: false,
+  }),
+);
 images.use(errorHandler);
 
 export default images;

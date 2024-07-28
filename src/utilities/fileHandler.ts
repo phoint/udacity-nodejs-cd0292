@@ -19,7 +19,7 @@ const search = async (
     const index = file.lastIndexOf(fileName);
     if (fileStat.isDirectory()) {
       continue;
-    } else if (index > -1 && file.charAt(fileName.length) === ".") {
+    } else if (index > -1 && file.charAt(fileName.length) === '.') {
       return filePath;
     }
   }
@@ -33,7 +33,7 @@ const resize = async (
   height?: number,
 ): Promise<string | null> => {
   const outputFile = await sharp(input)
-    .resize(height?{ width: width, height: height, fit: 'fill' }:width)
+    .resize(height ? { width: width, height: height, fit: 'fill' } : width)
     .jpeg()
     .toFile(output);
   if (outputFile) {
