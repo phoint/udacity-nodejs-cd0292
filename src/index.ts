@@ -6,10 +6,11 @@ const app = express();
 const port = 3000;
 
 // define a route handler for the default home page
-app.use(logger);
-app.use('/api', routes);
+app.use('/api', logger, routes);
 
 // start the Express server
 app.listen(port, () => {
   console.log(`server started at http://localhost:${port} `);
 });
+
+export default app

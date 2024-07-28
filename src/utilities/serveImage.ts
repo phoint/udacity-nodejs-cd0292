@@ -32,7 +32,7 @@ const serveImage = (
     }
     next();
   } catch (error) {
-    console.error("Error while serving image")
+    console.log("Error while serving image")
     next(error)
   }
   console.groupEnd()

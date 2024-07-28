@@ -7,7 +7,9 @@
     "prettier": "prettier --config .prettierrc 'src/**/*.ts' --write",
     "lint": "eslint 'src/**/*.ts'",
     "build": "npx tsc",
-    "start": "nodemon 'src/index.ts'"
+    "start": "nodemon 'src/index.ts'",
+    "jasmine": "jasmine",
+    "test": "npm run build && npm run jasmine"
   },
   "author": "",
   "license": "ISC",
@@ -15,7 +17,9 @@
   "devDependencies": {
     "@eslint/js": "^9.7.0",
     "@types/express": "^4.17.21",
+    "@types/jasmine": "^5.1.4",
     "@types/node": "^20.14.11",
+    "@types/supertest": "^6.0.2",
     "eslint": "^9.7.0",
     "eslint-config-prettier": "^9.1.0",
     "eslint-plugin-prettier": "^5.2.1",
@@ -28,7 +32,10 @@
   },
   "dependencies": {
     "express": "^4.19.2",
-    "sharp": "^0.33.4"
+    "jasmine": "^5.2.0",
+    "jasmine-spec-reporter": "^7.0.0",
+    "sharp": "^0.33.4",
+    "supertest": "^7.0.0"
   },
   "overrides": {
     "eslint": "^9.7.0"
